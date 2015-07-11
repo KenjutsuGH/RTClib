@@ -16,7 +16,7 @@ void printnvram(uint8_t address) {
 
 void setup () {
   Serial.begin(57600);
-#ifdef AVR
+#if defined(AVR) || defined (__STM32F1__)
   Wire.begin();
 #else
   Wire1.begin(); // Shield I2C pins connect to alt I2C bus on Arduino Due

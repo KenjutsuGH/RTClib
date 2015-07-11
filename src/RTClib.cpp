@@ -1,16 +1,19 @@
 // Code by JeeLabs http://news.jeelabs.org/code/
 // Released to the public domain! Enjoy!
 
+#include "Arduino.h"
 #include <Wire.h>
 #include "RTClib.h"
-#ifdef __AVR__
+#ifdef __AVR__ 
  #include <avr/pgmspace.h>
  #define WIRE Wire
-#else
- #define PROGMEM
- #define pgm_read_byte(addr) (*(const unsigned char *)(addr))
- #define WIRE Wire1
-#endif
+ #elif defined (_VARIANT_ARDUINO_STM32_)
+  #define WIRE Wire
+#else 
+  #define PROGMEM
+  #define pgm_read_byte(addr) (*(const unsigned char *)(addr))
+  #define WIRE Wire1
+ #endif
 
 #define DS1307_ADDRESS  0x68
 #define DS1307_CONTROL  0x07
